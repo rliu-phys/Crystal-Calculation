@@ -8,7 +8,7 @@ pd.set_option('display.max_columns', None)
 # List of reflections (Miller indices) – top 100 list (example)
 
 # Read the reflection data from the text file (assumes whitespace-delimited)
-df_ref = pd.read_csv("Al2O3/Al2O3_pristine.txt", delim_whitespace=True)
+df_ref = pd.read_csv("Al2O3/Al2O3.txt", delim_whitespace=True)
 
 # Extract the reflection array and the intensity (I) from the file
 # (Assuming the file columns are labeled as "h", "k", "l", ..., and "I")
