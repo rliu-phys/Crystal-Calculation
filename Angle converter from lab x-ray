@@ -1,0 +1,28 @@
+import numpy as np
+
+def convert_diffraction_angles(angle_list_deg, old_energy_kev=8.04, new_energy_kev=10.0):
+    """
+    Convert 2θ diffraction angles from one X-ray energy to another.
+
+    Parameters:
+    - angle_list_deg: list or array of 2θ angles in degrees (measured at old_energy_kev)
+    - old_energy_kev: original energy in keV (default: Cu Kα, 8.04 keV)
+    - new_energy_kev: new energy in keV (e.g., synchrotron)
+
+    Returns:
+    - new_angle_list_deg: list of 2θ angles in degrees at the new energy
+    """
+    angle_list_rad = np.radians(np.array(angle_list_deg) / 2)  # θ in radians
+    sin_theta_old = np.sin(angle_list_rad)
+    sin_theta_new = sin_theta_old * (old_energy_kev / new_energy_kev) 
+
+    # Handle domain errors: sinθ must be ≤ 1
+    sin_theta_new = np.clip(sin_theta_new, 0, 1)
+
+    theta_new_rad = np.arcsin(sin_theta_new)
+    angle_new_deg = 2 * np.degrees(theta_new_rad)
+    return angle_new_deg.tolist()
+
+original_angles = [48,56]  # in degrees, 2θ
+converted_angles = convert_diffraction_angles(original_angles, old_energy_kev=8.04, new_energy_kev=9.5)
+print(converted_angles)

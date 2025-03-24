@@ -9,11 +9,11 @@ def center_of_rotation(dzpx, dsamth, samth):
     return del_samx, del_samz
 
 # Example input values (adjust as needed)
-dzpx = -0.205
-dsamth = 10
-samth = 15.5
+dzpx = 2.612
+dsamth = 3.28
+samth = 20.4
 
 del_samx, del_samz = center_of_rotation(dzpx, dsamth, samth)
 print("samx should move:", del_samx)
 print("samz should move:", del_samz)
-print(sin(radians(85)))
+print("footprint ratio is:", sin(radians(samth)))
