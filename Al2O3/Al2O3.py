@@ -28,22 +28,22 @@ reflections = [(h, k, l) for h in range(-9, 10)
 #     (1, 1, 6),
 # ]
 
-Al2O3 = xu.materials.Crystal(
-    "Al2O3",
-    xu.materials.SGLattice(
-        167,             # space group R-3c (No. 167)
-        4.758, 12.991,   # lattice parameters: a and c (hexagonal: b = a, γ = 120° implicit)
-        atoms=["Al", "Al", "O", "O", "O"],
-        pos=[
-            (0.0, 0.0, 0.352),   # Al (Wyckoff 12c, independent position)
-            (0.0, 0.0, 0.852),   # symmetry-related Al (0.352 + 0.5)
-            (0.306, 0.0, 0.25),   # O (Wyckoff 18e, independent position)
-            (0.0, 0.306, 0.75),   # one symmetry equivalent for O
-            (-0.306, -0.306, 0.25)  # another symmetry equivalent for O
-        ]
-    )
-)
-
+# Al2O3 = xu.materials.Crystal(
+#     "Al2O3",
+#     xu.materials.SGLattice(
+#         167,             # space group R-3c (No. 167)
+#         4.758, 12.991,   # lattice parameters: a and c (hexagonal: b = a, γ = 120° implicit)
+#         atoms=["Al", "Al", "O", "O", "O"],
+#         pos=[
+#             (0.0, 0.0, 0.352),   # Al (Wyckoff 12c, independent position)
+#             (0.0, 0.0, 0.852),   # symmetry-related Al (0.352 + 0.5)
+#             (0.306, 0.0, 0.25),   # O (Wyckoff 18e, independent position)
+#             (0.0, 0.306, 0.75),   # one symmetry equivalent for O
+#             (-0.306, -0.306, 0.25)  # another symmetry equivalent for O
+#         ]
+#     )
+# )
+Al2O3 = xu.materials.Crystal.fromcif("Al2O3.cif")
 # Setup goniometer conversion and experimental geometry.
 qconv = xu.QConversion(('x-', 'z+'), ('z+', 'x-'), (0, 1, 0))
 hxrd = xu.Experiment(Al2O3.Q(1,-1,0), Al2O3.Q(0,0,1), qconv=qconv, en=9500)
