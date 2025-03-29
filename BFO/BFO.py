@@ -25,7 +25,7 @@ reflections = [(h, k, l) for h in range(-9, 10)
                            if (h, k, l) != (0, 0, 0)]
 
 # reflections = [
-#     (0, 1, 6),
+#     (1, 1, 6),
 # ]
 
 # Al2O3 = xu.materials.Crystal(
@@ -43,27 +43,27 @@ reflections = [(h, k, l) for h in range(-9, 10)
 #         ]
 #     )
 # )
-Al2O3 = xu.materials.Crystal.fromCIF("AL2O3/Al2O3.cif")
+BFO = xu.materials.Crystal.fromCIF("BFO/BFO.cif")
 # Setup goniometer conversion and experimental geometry.
 qconv = xu.QConversion(('x-', 'z+'), ('z+', 'x-'), (0, 1, 0))
-hxrd = xu.Experiment(Al2O3.Q(0,1,0), Al2O3.Q(0,0,1), qconv=qconv, en=10500)
+hxrd = xu.Experiment(BFO.Q(1,1,0), BFO.Q(0,0,1), qconv=qconv, en=10500)
 
 # Define goniometer angle bounds: (theta, phi fixed, delta, nu)
-bounds = ((0,120), (0), (0,30), (0,60))
+bounds = ((0,120), (0), (0,30), (0,65))
 
 results = []  # to store calculated parameters
 
 for idx, hkl in enumerate(reflections):
     # Compute Q-vector in the crystal frame
-    q_mat = Al2O3.Q(hkl)
+    q_mat = BFO.Q(hkl)
     # Transform Q-vector to laboratory frame
     q_lab = hxrd.Transform(q_mat)
     # Calculate lattice plane distance (d-spacing)
-    d_spacing = Al2O3.planeDistance(hkl)
+    d_spacing = BFO.planeDistance(hkl)
     # Fit goniometer angles
     ang, qerror, errcode = xu.Q2AngFit(q_lab, hxrd, bounds)
     # Back-transform to verify the reflection indices
-    hkl_back = hxrd.Ang2HKL(*ang, mat=Al2O3)
+    hkl_back = hxrd.Ang2HKL(*ang, mat=BFO)
     
     if qerror < 0.1:
         results.append({
@@ -84,4 +84,4 @@ filtered_results = [r for r in results if r["nu (deg)"] > r["theta (deg)"] and r
 # filtered_results = results
 df = pd.DataFrame(filtered_results)
 print(df)
-df.to_csv("Al2O3/Al2O3_reflections_filtered.txt", sep="\t", index=False)
+df.to_csv("BFO/BFO_reflections_filtered.txt", sep="\t", index=False)
