@@ -19,14 +19,14 @@ pd.set_option('display.max_columns', None)
 # reflections = [
 #     (1, -1, 4),
 # ]
-reflections = [(h, k, l) for h in range(-9, 10) 
-                           for k in range(-9, 10) 
-                           for l in range(-9, 10) 
-                           if (h, k, l) != (0, 0, 0)]
+# reflections = [(h, k, l) for h in range(-9, 10) 
+#                            for k in range(-9, 10) 
+#                            for l in range(-9, 10) 
+#                            if (h, k, l) != (0, 0, 0)]
 
-# reflections = [
-#     (0, 1, 6),
-# ]
+reflections = [
+    (0, 1, 6),
+]
 
 # Al2O3 = xu.materials.Crystal(
 #     "Al2O3",
@@ -46,10 +46,10 @@ reflections = [(h, k, l) for h in range(-9, 10)
 Al2O3 = xu.materials.Crystal.fromCIF("AL2O3/Al2O3.cif")
 # Setup goniometer conversion and experimental geometry.
 qconv = xu.QConversion(('x-', 'z+'), ('z+', 'x-'), (0, 1, 0))
-hxrd = xu.Experiment(Al2O3.Q(0,1,0), Al2O3.Q(0,0,1), qconv=qconv, en=10500)
+hxrd = xu.Experiment(Al2O3.Q(1,-1,0), Al2O3.Q(0,0,1), qconv=qconv, en=9500)
 
 # Define goniometer angle bounds: (theta, phi fixed, delta, nu)
-bounds = ((0,120), (0), (0,30), (0,60))
+bounds = ((0,120), (60), (0,30), (0,60))
 
 results = []  # to store calculated parameters
 
@@ -85,3 +85,5 @@ filtered_results = [r for r in results if r["nu (deg)"] > r["theta (deg)"] and r
 df = pd.DataFrame(filtered_results)
 print(df)
 df.to_csv("Al2O3/Al2O3_reflections_filtered.txt", sep="\t", index=False)
+hkl_back = hxrd.Ang2HKL(28.3, 30, 18.3, 48.2, mat=Al2O3)
+print(hkl_back)

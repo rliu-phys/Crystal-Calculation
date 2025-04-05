@@ -46,7 +46,7 @@ reflections = [(h, k, l) for h in range(-9, 10)
 BFO = xu.materials.Crystal.fromCIF("BFO/BFO.cif")
 # Setup goniometer conversion and experimental geometry.
 qconv = xu.QConversion(('x-', 'z+'), ('z+', 'x-'), (0, 1, 0))
-hxrd = xu.Experiment(BFO.Q(1,1,0), BFO.Q(0,0,1), qconv=qconv, en=10500)
+hxrd = xu.Experiment(BFO.Q(1,1,0), BFO.Q(0,0,1), qconv=qconv, en=8500)
 
 # Define goniometer angle bounds: (theta, phi fixed, delta, nu)
 bounds = ((0,120), (0), (0,30), (0,65))
