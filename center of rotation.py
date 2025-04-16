@@ -11,7 +11,7 @@ def center_of_rotation(dzpx, dsamth, samth):
 # Example input values (adjust as needed)
 dzpx = 0.3
 dsamth = 6.0
-samth = 17.63
+samth = 90.0
 
 del_samx, del_samz = center_of_rotation(dzpx, dsamth, samth)
 print("samx should move:", del_samx)
