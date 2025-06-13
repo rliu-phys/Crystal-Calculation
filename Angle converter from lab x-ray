@@ -23,6 +23,6 @@ def convert_diffraction_angles(angle_list_deg, old_energy_kev=8.04, new_energy_k
     angle_new_deg = 2 * np.degrees(theta_new_rad)
     return angle_new_deg.tolist()
 
-original_angles = [48,56]  # in degrees, 2θ
+original_angles = [14.8,29.9]  # in degrees, 2θ
 converted_angles = convert_diffraction_angles(original_angles, old_energy_kev=8.04, new_energy_kev=9.5)
 print(converted_angles)
