@@ -63,6 +63,6 @@ print(f"Fe: hkl {hkl}, qvec {np.round(q_material, 5)}")
 print(f"Lattice plane distance: {Fe.planeDistance(hkl):.4f}")
 
 ang, qerror, errcode = xu.Q2AngFit(q_laboratory, hxrd, bounds)
-print(f"err: {errcode:8.3f} ({qerror:.3f}) angles (Phi, Theta, delta, nu)= {np.round(ang, 5)}")
+print(f"err: {errcode:8.3f} ({qerror:.3f}) angles (Theta, phi, delta, nu)= {np.round(ang, 5)}")
 print("sanity check with back-transformation (hkl): ",
       np.round(hxrd.Ang2HKL(*ang,mat=Fe),5))
